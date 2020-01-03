@@ -2,9 +2,9 @@ package com.company;
 
 public class Spider extends Monster{
 
-    public Spider(int startRoom, String name) {
+    public Spider(int currentRoom, String name) {
 
-        super(startRoom, name);
+        super(currentRoom, name);
     }
     
     public String toString(){

@@ -8,9 +8,9 @@ public abstract class Creature {
 
     private String name;
 
-    public Creature (int startRoom, String name) {
+    public Creature (int currentRoom, String name) {
 
-        this.currentRoom = startRoom;
+        this.currentRoom = currentRoom;
         this.name = name;
 
         this.position = getGridPosition();

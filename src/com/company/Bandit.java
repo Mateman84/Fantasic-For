@@ -2,9 +2,9 @@ package com.company;
 
 public class Bandit extends  Monster {
 
-    public Bandit(int startRoom, String name) {
+    public Bandit(int currentRoom, String name) {
 
-        super(startRoom, name);
+        super(currentRoom, name);
     }
 
     public String toString(){

@@ -9,8 +9,8 @@ public class Hero extends Creature {
     private int health;
 
 
-    public Hero(int startRoom, String name, Maze maze) {
-        super(startRoom, name);
+    public Hero(int currentRoom, String name, Maze maze) {
+        super(currentRoom, name);
         this.maze = maze;
         this.health = 100;
 

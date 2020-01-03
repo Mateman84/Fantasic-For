@@ -12,8 +12,8 @@ public class Menu {
         while (true) {
             try {
                 int connectedRooms[] = maze.getGetConnectedRooms(hero.getCurrentRoom());
-                System.out.println("\nChoose what room to go to:" +
-                        Arrays.toString(connectedRooms));
+                //System.out.println("\n You wake up in an empty room");
+                System.out.println("\nChoose what room to go to:" + Arrays.toString(connectedRooms));
                 int choice = Integer.parseInt(scanner.nextLine());
 
                 for (int i = 0; i < connectedRooms.length; i++) {
