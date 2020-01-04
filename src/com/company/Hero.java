@@ -6,22 +6,22 @@ public class Hero extends Creature {
 
     Backpack backpack = new Backpack();
     Maze maze;
-    private int health;
+    //private int health;
 
 
-    public Hero(int currentRoom, String name, Maze maze) {
-        super(currentRoom, name);
+    public Hero(int currentRoom, String name, int healthPoints, Maze maze) {
+        super(currentRoom, name, healthPoints);
         this.maze = maze;
-        this.health = 100;
-
+        //this.health = 100;
     }
-
+/*
     public void isInjured() {
         health = health - 50;
         if (health == 0) {
             System.out.println("You died, Game Over");
             System.exit(0);
         }
+
         System.out.println("Warning! You are injured. Do you want to drink a potion? \nPress Y for Yes \nPress N to Continue");
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
@@ -29,7 +29,7 @@ public class Hero extends Creature {
             drinkPotion();
         }
     }
-
+*/
     private void drinkPotion() {
         Item potion = backpack.getItemName("Healing Potion");
         if (potion != null) {
