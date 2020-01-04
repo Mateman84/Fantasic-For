@@ -1,18 +1,20 @@
 package com.company;
 
 
+import java.util.Scanner;
+
 public abstract class Creature {
+
     private int currentRoom;
-
     public Position position;
-
     private String name;
+    private int healthPoints;
 
-    public Creature (int currentRoom, String name) {
+    public Creature (int currentRoom, String name, int healthPoints) {
 
         this.currentRoom = currentRoom;
         this.name = name;
-
+        this.healthPoints = healthPoints;
         this.position = getGridPosition();
     }
 
@@ -21,13 +23,34 @@ public abstract class Creature {
     }
 
     public int getCurrentRoom() {
-
         return currentRoom;
     }
 
     public void setCurrentRoom(int currentRoom) {
-
         this.currentRoom = currentRoom;
+    }
+
+    public int getHealthPoints() {
+        return healthPoints;
+    }
+
+    public void setHealthPoints(int healthPoints) {
+        this.healthPoints = healthPoints;
+    }
+    
+    public void isInjured() {
+        this.healthPoints = this.healthPoints - 50;
+        if (healthPoints == 0) {
+            System.out.println("You died, Game Over");
+            System.exit(0);
+        }
+
+        System.out.println("Warning! You are injured. Do you want to drink a potion? \nPress Y for Yes \nPress N to Continue");
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        if (input.toLowerCase().equals("y")) {
+            drinkPotion();
+        }
     }
 
     public Position getGridPosition(){     //new position means in the middle of the room

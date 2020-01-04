@@ -19,7 +19,7 @@ public class DungeonGame {
 
         goldenChest.addItem(dagger);
 
-        hero = new Hero(6, "Hero", maze);                      // Sätter ut Hero i ett förutbestämt rum
+        hero = new Hero(6, "Hero",100, maze);                      // Sätter ut Hero i ett förutbestämt rum
         hero.addItemToBackpack(new Potion("Healing Potion"));
         hero.addItemToBackpack(new Potion("Healing Potion"));
 
