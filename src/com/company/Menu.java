@@ -28,15 +28,14 @@ public class Menu {
         }
 
     }
+    public int roomEvents(int choice, int spiderPos, int banditPos, int dragonPos, int chestPos, Hero hero) {
 
-    public int roomEvents(int choice, Hero hero) {
-
-        if (choice == 3) {
+        if (choice == spiderPos) {
             while (true)
                 try {
                     if (hero.isSpiderDefeated()) {
                         System.out.println("\nYou have defeated the Spider in this room. Go and explore other room!");
-                        return 2;
+                        return spiderPos;
                     } else {
                         System.out.println("\nThere is a spider inside, what do you want to do?");
                         System.out.println("1. Attack\n" + "2. Go to another room\n");
@@ -51,9 +50,7 @@ public class Menu {
                     System.out.println("Hero, please select a number to choose an action.");
                 }
 
-        } else if (choice == 0 || choice == 4 || choice == 5 || choice == 8 || choice == 6) {
-            System.out.println("\nEmpty Room, nothing inside. Go to another Room");
-        } else if (choice == 2) {
+        }  else if (choice == dragonPos) {
             while (true)
                 try {
                     System.out.println("\nYou meet the dragon boss, what do you want to do?\"");
@@ -69,12 +66,12 @@ public class Menu {
                     System.out.println("Hero, please select a number to choose an action.");
                 }
 
-        } else if (choice == 1) {
+        } else if (choice == banditPos) {
             while (true)
                 try {
                     if (hero.isBanditDefeated()) {
                         System.out.println("\nYou have defeated the Bandit in this room. Go and explore other room!");
-                        return 2;
+                        return banditPos;
                     } else {
                         System.out.println("\nThere is a Bandit inside, what do you want to do?");
                         System.out.println("1. Attack\n" + "2. Go to another room\n");
@@ -89,8 +86,10 @@ public class Menu {
                 } catch (Exception ex) {
                     System.out.println("Hero, please select a number to choose an action.");
                 }
-        } else {
+        } else if (choice == chestPos) {
             System.out.println("You find a golden chest, there is a dagger inside, it has been put in your backpack!");
+        } else {
+            System.out.println("\nEmpty Room, nothing inside. Go to another Room");
         }
         return 2;
     }
