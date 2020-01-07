@@ -9,8 +9,8 @@ public class Hero extends Creature {
     //private int health;
 
 
-    public Hero(int currentRoom, String name, int healthPoints, Maze maze) {
-        super(currentRoom, name, healthPoints);
+    public Hero(int currentRoom, String name, int healthPoints, int attack, int defense, Maze maze) {
+        super(currentRoom, name, healthPoints, attack, defense);
         this.maze = maze;
         //this.health = 100;
     }
@@ -34,7 +34,7 @@ public class Hero extends Creature {
         Item potion = backpack.getItemName("Healing Potion");
         if (potion != null) {
             backpack.removeItem(potion);
-            health = health + 50;
+            //health = health + 50;
             System.out.println("You are fully healed");
         }else {
             System.out.println("You don't have any potions left.");
@@ -51,7 +51,7 @@ public class Hero extends Creature {
                 System.out.println("You defeat the Spider! Continue your adventure and find other Monster!");
                 maze.removeSpiderFromMaze();
         } else {
-            isInjured();
+            //isInjured();
             System.out.println("You need to find a dagger first");
         }
     }
@@ -70,7 +70,7 @@ public class Hero extends Creature {
             System.out.println("You defeat the Bandit! Continue your adventure and find other Monster!");
             maze.removeBanditFromMaze();
         } else {
-            isInjured();
+            //isInjured();
             System.out.println("You need defeat Spider first!");
         }
     }
@@ -90,7 +90,7 @@ public class Hero extends Creature {
             maze.removeDragonBossFromMaze();
             System.exit(0);
         } else {
-            isInjured();
+            //isInjured();
             System.out.println("You need defeat other Monster first!");
         }
 

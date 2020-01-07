@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Maze {
@@ -45,10 +46,27 @@ public class Maze {
         rooms[8] = new Room(connectedRooms8, 10, 10);
     }
 
-    public void addMonsterToMaze(){
-        monsters.add(new Spider(3,"Spider"));
-        monsters.add(new Bandit(1,"Bandit"));
-        monsters.add(new DragonBoss(2,"DragonBoss"));
+    public int addChestToMaze(Chest chest){
+        return chest.getPos();
+    }
+
+    public int addMonsterToMaze(String monsterType){
+        if(monsterType.equals("spider")){
+            int spiderPos = addMonsterToRoom(0,8);
+            monsters.add(new Spider(spiderPos,"Spider", 100, 10, 5));
+            return spiderPos;
+        }
+        if (monsterType.equals("bandit")){
+            int banditPos = addMonsterToRoom(0,8);
+            monsters.add(new Bandit(banditPos,"Bandit", 150, 15, 10));
+            return banditPos;
+        }
+        else if(monsterType.equals("dragon")) {
+            int dragonPos = addMonsterToRoom(0,8);
+            monsters.add(new DragonBoss(dragonPos,"DragonBoss", 200, 20, 15));
+            return dragonPos;
+        }
+        return 0;
     }
 
     public void removeSpiderFromMaze(){
@@ -71,6 +89,11 @@ public class Maze {
             }
         }
         return null;
+    }
+
+    public int addMonsterToRoom(int min, int max){
+        Random r = new Random();
+        return r.ints(min, (max + 1)).findFirst().getAsInt();
     }
 
     public void showMonster(){

@@ -9,12 +9,15 @@ public abstract class Creature {
     public Position position;
     private String name;
     private int healthPoints;
+    private int attack;
+    private int defense;
 
-    public Creature (int currentRoom, String name, int healthPoints) {
-
+    public Creature (int currentRoom, String name, int healthPoints, int attack, int defense) {
         this.currentRoom = currentRoom;
         this.name = name;
         this.healthPoints = healthPoints;
+        this.attack = attack;
+        this.defense = defense;
         this.position = getGridPosition();
     }
 
@@ -37,7 +40,7 @@ public abstract class Creature {
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
-    
+    /*
     public void isInjured() {
         this.healthPoints = this.healthPoints - 50;
         if (healthPoints == 0) {
@@ -52,7 +55,7 @@ public abstract class Creature {
             drinkPotion();
         }
     }
-
+    */
     public Position getGridPosition(){     //new position means in the middle of the room
         int x = currentRoom % 3;
         int y = currentRoom / 3;
