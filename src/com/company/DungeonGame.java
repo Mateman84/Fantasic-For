@@ -35,6 +35,7 @@ public class DungeonGame {
         System.out.println(spiderRoom);
         System.out.println(banditRoom);
         System.out.println(dragonRoom);
+        System.out.println(chestRoom);
 
         String filepath="D:\\my java\\Maze2\\Kahoot.wav";
         //Music music = new Music();

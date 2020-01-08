@@ -8,7 +8,6 @@ public class Hero extends Creature {
     Maze maze;
     //private int health;
 
-
     public Hero(int currentRoom, String name, int healthPoints, int attack, int defense, Maze maze) {
         super(currentRoom, name, healthPoints, attack, defense);
         this.maze = maze;
@@ -95,8 +94,6 @@ public class Hero extends Creature {
         }
 
     }
-
-
 }
 
 

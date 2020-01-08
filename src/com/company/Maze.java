@@ -50,23 +50,22 @@ public class Maze {
         return chest.getPos();
     }
 
-    public int addMonsterToMaze(String monsterType){
-        if(monsterType.equals("spider")){
-            int spiderPos = addMonsterToRoom(0,8);
-            monsters.add(new Spider(spiderPos,"Spider", 100, 10, 5));
-            return spiderPos;
+    public int addMonsterToMaze(String monsterType) {
+
+        int randomNumber = roomRandomiser();
+
+        while (randomNumber == 4 || randomNumber == 6) {
+            randomNumber = roomRandomiser();
         }
-        if (monsterType.equals("bandit")){
-            int banditPos = addMonsterToRoom(0,8);
-            monsters.add(new Bandit(banditPos,"Bandit", 150, 15, 10));
-            return banditPos;
+
+        if (monsterType.equals("spider")) {
+            monsters.add(new Spider(randomNumber, "Spider", 100, 10, 5));
+        } else if (monsterType.equals("bandit") && randomNumber != monsters.get(0).getCurrentRoom()) {
+            monsters.add(new Bandit(randomNumber, "Bandit", 150, 15, 10));
+        } else if (monsterType.equals("dragon") && randomNumber != monsters.get(0).getCurrentRoom() || randomNumber != monsters.get(1).getCurrentRoom()) {
+            monsters.add(new DragonBoss(randomNumber, "DragonBoss", 200, 20, 15));
         }
-        else if(monsterType.equals("dragon")) {
-            int dragonPos = addMonsterToRoom(0,8);
-            monsters.add(new DragonBoss(dragonPos,"DragonBoss", 200, 20, 15));
-            return dragonPos;
-        }
-        return 0;
+        return randomNumber;
     }
 
     public void removeSpiderFromMaze(){
@@ -91,9 +90,9 @@ public class Maze {
         return null;
     }
 
-    public int addMonsterToRoom(int min, int max){
+    public int roomRandomiser(){
         Random r = new Random();
-        return r.ints(min, (max + 1)).findFirst().getAsInt();
+        return r.ints(0, (8 + 1)).findFirst().getAsInt();
     }
 
     public void showMonster(){
