@@ -13,7 +13,7 @@ public class DungeonGame {
 
         backpack = new Backpack();
         dagger = new Dagger("superDagger");
-        goldenChest = new Chest("goldenChest",4);
+        goldenChest = new Chest("goldenChest",6);
         goldenChest.addItem(dagger);
 
         hero = new Hero(6, "Hero",100,10,10, maze);                      // Sätter ut Hero i ett förutbestämt rum
@@ -27,15 +27,22 @@ public class DungeonGame {
         System.out.println("\nWelcome to explore the Dungeon, hero!\n");
         maze.updateHeroPosition(hero.getGridPosition(), hero.getGridPosition());
         maze.showGameBoard();
-        int chestRoom = maze.addChestToMaze(goldenChest);
-        int spiderRoom = maze.addMonsterToMaze("spider");
-        int banditRoom = maze.addMonsterToMaze("bandit");
-        int dragonRoom = maze.addMonsterToMaze("dragon");
 
+        int chestRoom = maze.addChestToMaze(goldenChest);
+
+        maze.addMonsterToMaze(new Spider(chestRoom, "Spider", 100, 10, 5));
+        maze.addMonsterToMaze(new Bandit(chestRoom, "Bandit", 150,15,10));
+        maze.addMonsterToMaze(new DragonBoss(chestRoom, "Dragonboss", 200,20,15));
+
+        int spiderRoom = maze.addMonsterToRoom();
+        int banditRoom = maze.addMonsterToRoom();
+        int dragonRoom = maze.addMonsterToRoom();
+
+        System.out.println(chestRoom);
         System.out.println(spiderRoom);
         System.out.println(banditRoom);
         System.out.println(dragonRoom);
-        System.out.println(chestRoom);
+
 
         String filepath="D:\\my java\\Maze2\\Kahoot.wav";
         //Music music = new Music();
@@ -74,8 +81,6 @@ public class DungeonGame {
         maze.showRoomHeroHasEntered(oldPosition);
         maze.showGameBoard();
     }
-
-
 }
 
 

@@ -1,13 +1,16 @@
 package com.company;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Maze {
     private Scanner scanner = new Scanner(System.in);
+    private ArrayList<Integer>occupiedRooms = new ArrayList<Integer>();
     ArrayList<Monster> monsters = new ArrayList<>();
     Room[] rooms = new Room[9];
+
 
     String[][] grid = {
             {"X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X"},
@@ -46,26 +49,38 @@ public class Maze {
         rooms[8] = new Room(connectedRooms8, 10, 10);
     }
 
-    public int addChestToMaze(Chest chest){
-        return chest.getPos();
+    public int addChestToMaze(Chest chest) {
+        int randomRoomNr = roomRandomiser();
+
+            if(occupiedRooms.contains(randomRoomNr) || randomRoomNr == 6){
+                randomRoomNr = roomRandomiser();
+            } else {
+                chest.setPos(randomRoomNr);
+                occupiedRooms.add(chest.getPos());
+                return randomRoomNr;
+            }
+        return randomRoomNr;
     }
 
-    public int addMonsterToMaze(String monsterType) {
+    public int addMonsterToRoom(){
+        int newRoom;
 
-        int randomNumber = roomRandomiser();
-
-        while (randomNumber == 4 || randomNumber == 6) {
-            randomNumber = roomRandomiser();
+        for (Monster monster : monsters) {
+            newRoom = roomRandomiser();
+            if (occupiedRooms.contains(newRoom) || newRoom == 6){
+                continue;
+            } else {
+                monster.setCurrentRoom(newRoom);
+                occupiedRooms.add(newRoom);
+                return newRoom;
+            }
         }
+        return 0;
+    }
 
-        if (monsterType.equals("spider")) {
-            monsters.add(new Spider(randomNumber, "Spider", 100, 10, 5));
-        } else if (monsterType.equals("bandit") && randomNumber != monsters.get(0).getCurrentRoom()) {
-            monsters.add(new Bandit(randomNumber, "Bandit", 150, 15, 10));
-        } else if (monsterType.equals("dragon") && randomNumber != monsters.get(0).getCurrentRoom() || randomNumber != monsters.get(1).getCurrentRoom()) {
-            monsters.add(new DragonBoss(randomNumber, "DragonBoss", 200, 20, 15));
-        }
-        return randomNumber;
+
+    public void addMonsterToMaze(Monster monster) {
+        monsters.add(monster);
     }
 
     public void removeSpiderFromMaze(){

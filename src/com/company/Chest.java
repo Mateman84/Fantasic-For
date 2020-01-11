@@ -13,6 +13,10 @@ public class Chest {
         this.pos = pos;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setPos(int pos) {
         this.pos = pos;
     }
