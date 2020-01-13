@@ -4,22 +4,19 @@ public class DungeonGame {
 
     Maze maze = new Maze();
     Hero hero;
-    Backpack backpack;
-    Dagger dagger;
+    Dagger dagger = new Dagger("superDagger", 15);
     Menu menu = new Menu();
     Chest goldenChest;
+    private int chestRoom;
 
     public DungeonGame() {
-
-        backpack = new Backpack();
-        dagger = new Dagger("superDagger");
-        goldenChest = new Chest("goldenChest",6);
-        goldenChest.addItem(dagger);
 
         hero = new Hero(6, "Hero",100,10,10, maze);                      // Sätter ut Hero i ett förutbestämt rum
         hero.addItemToBackpack(new Potion("Healing Potion"));
         hero.addItemToBackpack(new Potion("Healing Potion"));
-
+        goldenChest = new Chest("goldenChest",6, true);
+        chestRoom = maze.addChestToMaze(goldenChest);
+        goldenChest.addItem(dagger);
     }
 
     public void startGame() {
@@ -27,8 +24,6 @@ public class DungeonGame {
         System.out.println("\nWelcome to explore the Dungeon, hero!\n");
         maze.updateHeroPosition(hero.getGridPosition(), hero.getGridPosition());
         maze.showGameBoard();
-
-        int chestRoom = maze.addChestToMaze(goldenChest);
 
         maze.addMonsterToMaze(new Spider(chestRoom, "Spider", 100, 10, 5));
         maze.addMonsterToMaze(new Bandit(chestRoom, "Bandit", 150,15,10));
@@ -38,10 +33,11 @@ public class DungeonGame {
         int banditRoom = maze.addMonsterToRoom();
         int dragonRoom = maze.addMonsterToRoom();
 
-        System.out.println(chestRoom);
-        System.out.println(spiderRoom);
-        System.out.println(banditRoom);
-        System.out.println(dragonRoom);
+        System.out.println("Chest room = " + chestRoom + " Chest is empty = " + goldenChest.isEmpty());
+        System.out.println("Spiders room is = " + spiderRoom);
+        System.out.println("Bandit room is = " + banditRoom);
+        System.out.println("Dragon room is = " + dragonRoom);
+        System.out.println("Hero items in backpack = " + hero.getBackpack().getItems());
 
 
         String filepath="D:\\my java\\Maze2\\Kahoot.wav";
@@ -55,9 +51,9 @@ public class DungeonGame {
 
             int nextChoice = menu.roomEvents(choice, spiderRoom, banditRoom, dragonRoom, chestRoom, hero);
 
-            if(nextChoice==chestRoom){
+            if(nextChoice == chestRoom){
                 hero.addItemToBackpack(dagger);
-                backpack.showItems();
+                System.out.println("Hero items in backpack = " + hero.getBackpack().getItems());
             }
 
             if (nextChoice == spiderRoom){
@@ -68,7 +64,7 @@ public class DungeonGame {
                 hero.attackBandit();
             }
 
-            if(nextChoice == dragonRoom){
+            if (nextChoice == dragonRoom) {
                 hero.attackDragonBoss();
             }
         }

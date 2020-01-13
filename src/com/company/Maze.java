@@ -56,8 +56,7 @@ public class Maze {
                 randomRoomNr = roomRandomiser();
             } else {
                 chest.setPos(randomRoomNr);
-                occupiedRooms.add(chest.getPos());
-                return randomRoomNr;
+                occupiedRooms.add(randomRoomNr);
             }
         return randomRoomNr;
     }
