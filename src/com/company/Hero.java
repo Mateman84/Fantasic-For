@@ -4,13 +4,14 @@ import java.util.Scanner;
 
 public class Hero extends Creature {
 
-    Backpack backpack = new Backpack();
+    private Backpack backpack;
     Maze maze;
     //private int health;
 
     public Hero(int currentRoom, String name, int healthPoints, int attack, int defense, Maze maze) {
         super(currentRoom, name, healthPoints, attack, defense);
         this.maze = maze;
+        this.backpack = new Backpack();
         //this.health = 100;
     }
 /*
@@ -40,6 +41,9 @@ public class Hero extends Creature {
         }
     }
 
+    public Backpack getBackpack() {
+        return backpack;
+    }
 
     public void addItemToBackpack(Item item) {
         backpack.addItem(item);

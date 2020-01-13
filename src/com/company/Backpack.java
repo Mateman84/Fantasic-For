@@ -10,17 +10,15 @@ public class Backpack {
 
     public void addItem(Item item) {
         items.add(item);
+        System.out.println("Added Item " + item.getName());
     }
 
     public void removeItem (Item item){
         items.remove(item);
     }
 
-
-    public void showItems(){
-        for(Item item: items){
-            System.out.println("Now you backpack have: " + item);;
-        }
+    public ArrayList<Item> getItems() {
+        return items;
     }
 
     public Item getItemName(String name) {
@@ -30,5 +28,12 @@ public class Backpack {
             }
         }
         return null;
+    }
+
+    @Override
+    public String toString() {
+        return "Backpack{" +
+                "items=" + items +
+                '}';
     }
 }

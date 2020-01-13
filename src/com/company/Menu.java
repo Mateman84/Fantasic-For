@@ -88,6 +88,7 @@ public class Menu {
                 }
         } else if (choice == chestPos) {
             System.out.println("You find a golden chest, there is a dagger inside, it has been put in your backpack!");
+            return  chestPos;
         } else {
             System.out.println("\nEmpty Room, nothing inside. Go to another Room");
         }

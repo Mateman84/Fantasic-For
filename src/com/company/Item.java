@@ -13,11 +13,12 @@ public abstract class Item {
         return name;
     }
 
-
     @Override
-    public abstract String toString();
-
-
+    public String toString() {
+        return "Item{" +
+                "name = '" + name + '\'' +
+                '}';
+    }
 }
 
 

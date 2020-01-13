@@ -4,17 +4,27 @@ import java.util.ArrayList;
 
 public class Chest {
 
-    private ArrayList<Dagger> daggers = new ArrayList<>();
+    private ArrayList<Item> items = new ArrayList<>();
     private String name;
     private int pos;
+    private boolean isEmpty;
 
-    public Chest(String name, int pos) {
+    public Chest(String name, int pos, boolean isEmpty) {
         this.name = name;
         this.pos = pos;
+        this.isEmpty = true;
     }
 
     public String getName() {
         return name;
+    }
+
+    public boolean isEmpty() {
+        return isEmpty;
+    }
+
+    public void setEmpty(boolean empty) {
+        isEmpty = empty;
     }
 
     public void setPos(int pos) {
@@ -30,8 +40,8 @@ public class Chest {
         return null;
     }
 
-    public void addItem(Dagger dagger) {
-        daggers.add(dagger);
-
+    public void addItem(Item item) {
+        items.add(item);
+        this.setEmpty(false);
     }
 }
