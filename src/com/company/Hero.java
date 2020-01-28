@@ -29,6 +29,7 @@ public class Hero extends Creature {
             drinkPotion();
         }
     }
+
 */
     private void drinkPotion() {
         Item potion = backpack.getItemName("Healing Potion");

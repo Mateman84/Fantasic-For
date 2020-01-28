@@ -10,7 +10,6 @@ public class Backpack {
 
     public void addItem(Item item) {
         items.add(item);
-        System.out.println("Added Item " + item.getName());
     }
 
     public void removeItem (Item item){

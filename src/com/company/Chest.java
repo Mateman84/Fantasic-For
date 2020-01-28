@@ -44,4 +44,9 @@ public class Chest {
         items.add(item);
         this.setEmpty(false);
     }
+    public void removeItemFromChest(Item item){
+        items.remove(item);
+        System.out.println("You take the " + item.getName() + " from the chest and put it in your backpack");
+        this.setEmpty(true);
+    }
 }

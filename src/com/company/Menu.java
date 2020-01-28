@@ -28,13 +28,15 @@ public class Menu {
         }
 
     }
-    public int roomEvents(int choice, int spiderPos, int banditPos, int dragonPos, int chestPos, Hero hero) {
 
+
+    public int roomEvents(int choice, int spiderPos, int banditPos, int dragonPos, int chestPos, Hero hero) {
+        showHeroStats(hero);
         if (choice == spiderPos) {
             while (true)
                 try {
                     if (hero.isSpiderDefeated()) {
-                        System.out.println("\nYou have defeated the Spider in this room. Go and explore other room!");
+                        System.out.println("\nThe corpse of the spider lies on the floor, there is nothing else here. Go and explore other rooms.");
                         return spiderPos;
                     } else {
                         System.out.println("\nThere is a spider inside, what do you want to do?");
@@ -42,10 +44,13 @@ public class Menu {
                     }
                     Scanner scanner = new Scanner(System.in);
                     int nextChoice = Integer.parseInt(scanner.nextLine());
-                    if (nextChoice == 1 || nextChoice == 2) {
-                        return nextChoice;
+                    if (nextChoice == 1) {
+                        hero.attackSpider();
+                    } else if (nextChoice == 2){
+                        return spiderPos;
+                    } else {
+                        System.out.println("Hero, please select between 1-2 to choose an action");
                     }
-                    System.out.println("Hero, please select between 1-2 to choose an action");
                 } catch (Exception ex) {
                     System.out.println("Hero, please select a number to choose an action.");
                 }
@@ -58,8 +63,10 @@ public class Menu {
 
                     Scanner scanner = new Scanner(System.in);
                     int nextChoice = Integer.parseInt(scanner.nextLine());
-                    if (nextChoice == 1 || nextChoice == 2) {
-                        return nextChoice;
+                    if (nextChoice == 1) {
+                        hero.attackDragonBoss();
+                    } else if (nextChoice == 2){
+                        return dragonPos;
                     }
                     System.out.println("Hero, please select between 1-2 to choose an action");
                 } catch (Exception ex) {
@@ -76,23 +83,31 @@ public class Menu {
                         System.out.println("\nThere is a Bandit inside, what do you want to do?");
                         System.out.println("1. Attack\n" + "2. Go to another room\n");
                     }
-
                     Scanner scanner = new Scanner(System.in);
                     int nextChoice = Integer.parseInt(scanner.nextLine());
-                    if (nextChoice == 1 || nextChoice == 2) {
-                        return nextChoice;
+                    if (nextChoice == 1) {
+                        hero.attackBandit();
+                    } else if (nextChoice == 2){
+                        return banditPos;
                     }
                     System.out.println("Hero, please select between 1-2 to choose an action");
                 } catch (Exception ex) {
                     System.out.println("Hero, please select a number to choose an action.");
                 }
         } else if (choice == chestPos) {
-            System.out.println("You find a golden chest, there is a dagger inside, it has been put in your backpack!");
-            return  chestPos;
+            System.out.println("You enter a room with a golden chest.");
+            return chestPos;
         } else {
             System.out.println("\nEmpty Room, nothing inside. Go to another Room");
         }
         return 2;
+    }
+
+    public void showHeroStats(Hero hero){
+        System.out.println("Hero HP: " + hero.getHealthPoints());
+        System.out.println("Hero Attack: " + hero.getAttack());
+        System.out.println("Hero Attack: " + hero.getDefense());
+        System.out.println("Hero inventory " + hero.getBackpack());
     }
 }
 
