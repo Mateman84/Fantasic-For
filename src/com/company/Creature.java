@@ -40,26 +40,54 @@ public abstract class Creature {
     public void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
-    /*
-    public void isInjured() {
-        this.healthPoints = this.healthPoints - 50;
-        if (healthPoints == 0) {
-            System.out.println("You died, Game Over");
-            System.exit(0);
-        }
 
-        System.out.println("Warning! You are injured. Do you want to drink a potion? \nPress Y for Yes \nPress N to Continue");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (input.toLowerCase().equals("y")) {
-            drinkPotion();
-        }
+    public int getAttack() {
+        return attack;
     }
-    */
+
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public void setDefense(int defense) {
+        this.defense = defense;
+    }
+
+    /*
+            public void isInjured() {
+                this.healthPoints = this.healthPoints - 50;
+                if (healthPoints == 0) {
+                    System.out.println("You died, Game Over");
+                    System.exit(0);
+                }
+
+                System.out.println("Warning! You are injured. Do you want to drink a potion? \nPress Y for Yes \nPress N to Continue");
+                Scanner scanner = new Scanner(System.in);
+                String input = scanner.nextLine();
+                if (input.toLowerCase().equals("y")) {
+                    drinkPotion();
+                }
+            }
+            */
     public Position getGridPosition(){     //new position means in the middle of the room
         int x = currentRoom % 3;
         int y = currentRoom / 3;
         return new Position(2 + (x*4), 2 + (y*4));
     }
 
+    @Override
+    public String toString() {
+        return "Creature{" +
+                "currentRoom=" + currentRoom +
+                ", position=" + position +
+                ", name='" + name + '\'' +
+                ", healthPoints=" + healthPoints +
+                ", attack=" + attack +
+                ", defense=" + defense +
+                '}';
+    }
 }

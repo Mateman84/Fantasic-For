@@ -52,20 +52,26 @@ public class DungeonGame {
             int nextChoice = menu.roomEvents(choice, spiderRoom, banditRoom, dragonRoom, chestRoom, hero);
 
             if(nextChoice == chestRoom){
-                hero.addItemToBackpack(dagger);
-                System.out.println("Hero items in backpack = " + hero.getBackpack().getItems());
+                if(goldenChest.isEmpty()){
+                    System.out.println("You have already emptied the chest.");
+                } else {
+                    goldenChest.removeItemFromChest(dagger);
+                    hero.addItemToBackpack(dagger);
+                    hero.setAttack(hero.getAttack() + dagger.getDamage());
+                    System.out.println("Hero items in backpack = " + hero.getBackpack().getItems());
+                }
             }
 
             if (nextChoice == spiderRoom){
-                hero.attackSpider();
+                //hero.attackSpider();
             }
 
             if (nextChoice == banditRoom) {
-                hero.attackBandit();
+                //hero.attackBandit();
             }
 
             if (nextChoice == dragonRoom) {
-                hero.attackDragonBoss();
+                //hero.attackDragonBoss();
             }
         }
 }
