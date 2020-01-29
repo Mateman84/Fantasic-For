@@ -56,7 +56,7 @@ public class Hero extends Creature {
                 maze.removeSpiderFromMaze();
         } else {
             //isInjured();
-            System.out.println("You need to find a dagger first");
+            System.out.println("You need to find a weapon first");
         }
     }
 

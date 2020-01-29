@@ -62,7 +62,7 @@ public class Maze {
     }
 
     public int addMonsterToRoom(){
-        int newRoom;
+        int newRoom = roomRandomiser();
 
         for (Monster monster : monsters) {
             newRoom = roomRandomiser();
@@ -74,7 +74,7 @@ public class Maze {
                 return newRoom;
             }
         }
-        return 0;
+        return newRoom;
     }
 
 

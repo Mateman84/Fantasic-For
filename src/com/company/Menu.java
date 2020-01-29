@@ -30,7 +30,7 @@ public class Menu {
     }
 
 
-    public int roomEvents(int choice, int spiderPos, int banditPos, int dragonPos, int chestPos, Hero hero) {
+    public int roomEvents(int choice, int spiderPos, int banditPos, int dragonPos, int goldenChestPos, int silverChestPos, Hero hero) {
         showHeroStats(hero);
         if (choice == spiderPos) {
             while (true)
@@ -94,9 +94,12 @@ public class Menu {
                 } catch (Exception ex) {
                     System.out.println("Hero, please select a number to choose an action.");
                 }
-        } else if (choice == chestPos) {
+        } else if (choice == goldenChestPos) {
             System.out.println("You enter a room with a golden chest.");
-            return chestPos;
+            return goldenChestPos;
+        } else if (choice == silverChestPos) {
+            System.out.println("You enter a room with a silver chest.");
+            return silverChestPos;
         } else {
             System.out.println("\nEmpty Room, nothing inside. Go to another Room");
         }
