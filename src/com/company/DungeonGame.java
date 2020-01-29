@@ -1,22 +1,36 @@
 package com.company;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class DungeonGame {
 
     Maze maze = new Maze();
     Hero hero;
-    Dagger dagger = new Dagger("superDagger", 15);
+    Spider spider;
+    Bandit bandit;
+    DragonBoss dragonBoss;
+    Weapon weapon = new Weapon("superDagger", 15);
+    Armor armor = new Armor("superArmor", 10);
     Menu menu = new Menu();
     Chest goldenChest;
-    private int chestRoom;
+    Chest silverChest;
+    private int goldenChestRoom;
+    private int silverChestRoom;
 
     public DungeonGame() {
 
         hero = new Hero(6, "Hero",100,10,10, maze);                      // Sätter ut Hero i ett förutbestämt rum
         hero.addItemToBackpack(new Potion("Healing Potion"));
         hero.addItemToBackpack(new Potion("Healing Potion"));
+        spider = new Spider(goldenChestRoom, "Spider", monsterStatRandomizer(05,100), monsterStatRandomizer(5,10), monsterStatRandomizer(0,5));
+        bandit = new Bandit(goldenChestRoom, "Bandit", 150,15,10);
+        dragonBoss = new DragonBoss(goldenChestRoom, "Dragonboss", 200,20,15);
         goldenChest = new Chest("goldenChest",6, true);
-        chestRoom = maze.addChestToMaze(goldenChest);
-        goldenChest.addItem(dagger);
+        silverChest = new Chest("silverChest", 6, true);
+        goldenChestRoom = maze.addChestToMaze(goldenChest);
+        silverChestRoom = maze.addChestToMaze(silverChest);
+        goldenChest.addItem(weapon);
+        silverChest.addItem(armor);
     }
 
     public void startGame() {
@@ -25,16 +39,18 @@ public class DungeonGame {
         maze.updateHeroPosition(hero.getGridPosition(), hero.getGridPosition());
         maze.showGameBoard();
 
-        maze.addMonsterToMaze(new Spider(chestRoom, "Spider", 100, 10, 5));
-        maze.addMonsterToMaze(new Bandit(chestRoom, "Bandit", 150,15,10));
-        maze.addMonsterToMaze(new DragonBoss(chestRoom, "Dragonboss", 200,20,15));
+        maze.addMonsterToMaze(spider);
+        maze.addMonsterToMaze(bandit);
+        maze.addMonsterToMaze(dragonBoss);
 
         int spiderRoom = maze.addMonsterToRoom();
         int banditRoom = maze.addMonsterToRoom();
         int dragonRoom = maze.addMonsterToRoom();
 
-        System.out.println("Chest room = " + chestRoom + " Chest is empty = " + goldenChest.isEmpty());
+        System.out.println("Golden chest room = " + goldenChestRoom + " golden chest is empty = " + goldenChest.isEmpty());
+        System.out.println("Silver chest room = " + silverChestRoom + " silver chest is empty = " + silverChest.isEmpty());
         System.out.println("Spiders room is = " + spiderRoom);
+        System.out.println("Spiders stats: " + spider.getHealthPoints() + " " + spider.getAttack() + " " + spider.getDefense());
         System.out.println("Bandit room is = " + banditRoom);
         System.out.println("Dragon room is = " + dragonRoom);
         System.out.println("Hero items in backpack = " + hero.getBackpack().getItems());
@@ -49,16 +65,26 @@ public class DungeonGame {
 
             moveHeroToRoom(choice);
 
-            int nextChoice = menu.roomEvents(choice, spiderRoom, banditRoom, dragonRoom, chestRoom, hero);
+            int nextChoice = menu.roomEvents(choice, spiderRoom, banditRoom, dragonRoom, goldenChestRoom, silverChestRoom, hero);
 
-            if(nextChoice == chestRoom){
+            if(nextChoice == goldenChestRoom){
                 if(goldenChest.isEmpty()){
                     System.out.println("You have already emptied the chest.");
                 } else {
-                    goldenChest.removeItemFromChest(dagger);
-                    hero.addItemToBackpack(dagger);
-                    hero.setAttack(hero.getAttack() + dagger.getDamage());
-                    System.out.println("Hero items in backpack = " + hero.getBackpack().getItems());
+                    goldenChest.removeItemFromChest(weapon);
+                    hero.addItemToBackpack(weapon);
+                    hero.setAttack(hero.getAttack() + weapon.getDamage());
+                    System.out.println("Your damage is now: " + hero.getAttack());
+                }
+            }
+            if(nextChoice == silverChestRoom){
+                if(silverChest.isEmpty()){
+                    System.out.println("You have already emptied the chest.");
+                } else {
+                    silverChest.removeItemFromChest(armor);
+                    hero.addItemToBackpack(armor);
+                    hero.setDefense(hero.getDefense() + armor.getDefense());
+                    System.out.println("Your Armor is now: " + hero.getDefense());
                 }
             }
 
@@ -82,6 +108,12 @@ public class DungeonGame {
         maze.updateHeroPosition(hero.getGridPosition(), oldPosition);
         maze.showRoomHeroHasEntered(oldPosition);
         maze.showGameBoard();
+    }
+    public int monsterStatRandomizer (int lowestStat, int highestStat){
+        int randomStatNumber = ThreadLocalRandom.current().nextInt(lowestStat, highestStat);
+        System.out.println("Random number generated is : " + randomStatNumber);
+
+        return randomStatNumber;
     }
 }
 
